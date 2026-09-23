@@ -120,8 +120,26 @@
 
     <script>
         function copyPrompt() {
-            // Nur dieser saubere, elegante Befehl wird kopiert – kein Code, kein Programmier-Salat!
-            const cleanText = `Starte bitte meinen persönlichen Seelenspiegel und begrüße mich herzlich mit: „Herzlich willkommen zu deinem persönlichen Seelenspiegel. Schön, dass du dir diese Zeit für dich nimmst.“ Führe mich danach durch die 15 Fragen der Selbstreflexion.`;
+            // Die 15 Fragen sauber definiert
+            const questions = [
+                "Welcher Satz beschreibt am besten, wie du dich selbst siehst?",
+                "Was kommt dir in den Sinn, wenn du an das denkst, was du gut kannst und was dich ausmacht?",
+                "Woran merkst du, was dir guttut und was dir wichtig ist?",
+                "Was ist dir für dein Leben wichtig, wenn du an deine Wünsche und Vorstellungen denkst?",
+                "Was möchtest du, dass andere Menschen von dir sehen oder verstehen?",
+                "Was bedeuten Liebe und Zugehörigkeit für dich im Zusammenhang mit anderen Menschen?",
+                "Wie erlebst du Nähe und Abstand zu anderen Menschen?",
+                "Was bedeutet Vertrauen für dich im Umgang mit einem anderen Menschen?",
+                "Wenn du an deine Kindheit zurückdenkst: Gibt es Erfahrungen oder Erwartungen, die für dich heute noch eine Rolle spielen? Wenn ja, welche?",
+                "Wenn es in deinem Leben eine verletzende Erfahrung gab: Was hat sie verändert – und was vielleicht auch nicht?",
+                "Falls du Schutzmauern in deinem Leben kennst: Wovor möchtest du dich damit schützen – und was geben sie dir?",
+                "Gibt es Gefühle oder Situationen, die etwas in deinem Verhalten verändern? Wenn ja, welche – und was bleibt dabei trotzdem gleich?",
+                "Welche Bedeutung haben persönliche Grenzen für dich, und wie gehst du damit um, wenn sie im Kontakt mit anderen eine Rolle spielen?",
+                "Wie erlebst du es, wenn du anderen Menschen mehr von dir zeigst?",
+                "Woran machst du deinen eigenen Wert fest, und wie erlebst du ihn in unterschiedlichen Situationen?"
+            ];
+
+            const cleanText = `Starte bitte meinen persönlichen Seelenspiegel und begrüße mich herzlich mit: „Herzlich willkommen zu deinem persönlichen Seelenspiegel. Schön, dass du dir diese Zeit für dich nimmst.“ Führe mich danach Schritt für Schritt durch die folgenden 15 Fragen:\n\n` + questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
 
             navigator.clipboard.writeText(cleanText).then(() => {
                 const toast = document.getElementById('toast');
