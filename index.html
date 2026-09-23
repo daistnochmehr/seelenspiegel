@@ -120,25 +120,17 @@
 
     <script>
         function copyPrompt() {
-            const questions = [
-                "Welcher Satz beschreibt am besten, wie du dich selbst siehst?",
-                "Was kommt dir in den Sinn, wenn du an das denkst, was du gut kannst und was dich ausmacht?",
-                "Woran merkst du, was dir guttut und was dir wichtig ist?",
-                "Was ist dir für dein Leben wichtig, wenn du an deine Wünsche und Vorstellungen denkst?",
-                "Was möchtest du, dass andere Menschen von dir sehen oder verstehen?",
-                "Was bedeuten Liebe und Zugehörigkeit für dich im Zusammenhang mit anderen Menschen?",
-                "Wie erlebst du Nähe und Abstand zu anderen Menschen?",
-                "Was bedeutet Vertrauen für dich im Umgang mit einem anderen Menschen?",
-                "Wenn du an deine Kindheit zurückdenkst: Gibt es Erfahrungen oder Erwartungen, die für dich heute noch eine Rolle spielen? Wenn ja, welche?",
-                "Wenn es in deinem Leben eine verletzende Erfahrung gab: Was hat sie verändert – und was vielleicht auch nicht?",
-                "Falls du Schutzmauern in deinem Leben kennst: Wovor möchtest du dich damit schützen – und was geben sie dir?",
-                "Gibt es Gefühle oder Situationen, die etwas in deinem Verhalten verändern? Wenn ja, welche – und was bleibt dabei trotzdem gleich?",
-                "Welche Bedeutung haben persönliche Grenzen für dich, und wie gehst du damit um, wenn sie im Kontakt mit anderen eine Rolle spielen?",
-                "Wie erlebst du es, wenn du anderen Menschen mehr von dir zeigst?",
-                "Woran machst du deinen eigenen Wert fest, und wie erlebst du ihn in unterschiedlichen Situationen?"
-            ];
+            // Wir übergeben der KI nur den Start und die absolute Handlungsanweisung, 
+            // ohne dass eine Liste aller 15 Fragen im Klartext im Prompt steht.
+            const cleanText = `Starte bitte meinen persönlichen Seelenspiegel. 
 
-            const cleanText = `Starte bitte meinen persönlichen Seelenspiegel. Begrüße mich zuerst herzlich mit: „Herzlich willkommen zu deinem persönlichen Seelenspiegel. Schön, dass du dir diese Zeit für dich nimmst.“\n\nFühre mich danach streng schrittweise durch die folgenden 15 Fragen. Stelle mir IMMER NUR DIE AKTUELLE FRAGE und warte auf meine Antwort, bevor du zur nächsten übergehst. Zeige mir niemals alle Fragen auf einmal.\n\nHier sind die Fragen zur internen Orientierung:\n` + questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
+Begrüße mich zuerst herzlich mit genau diesen Worten:
+„Herzlich willkommen zu deinem persönlichen Seelenspiegel. Schön, dass du dir diese Zeit für dich nimmst.“
+
+Deine Aufgabe ist es, mich durch insgesamt 15 persönliche Fragen zu führen. Stelle mir jetzt bitte DIREKT ALS ERSTES NUR DIE ERSTE FRAGE:
+„Welcher Satz beschreibt am besten, wie du dich selbst siehst?“
+
+Warte danach auf meine Antwort. Zeige mir keinesfalls die anderen Fragen im Voraus. Nach meiner Antwort fragst du mich nach und nach nach den weiteren Schritten. Bist du bereit?`;
 
             navigator.clipboard.writeText(cleanText).then(() => {
                 const toast = document.getElementById('toast');
