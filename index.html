@@ -120,7 +120,6 @@
 
     <script>
         function copyPrompt() {
-            // Die 15 Fragen sauber definiert
             const questions = [
                 "Welcher Satz beschreibt am besten, wie du dich selbst siehst?",
                 "Was kommt dir in den Sinn, wenn du an das denkst, was du gut kannst und was dich ausmacht?",
@@ -139,7 +138,7 @@
                 "Woran machst du deinen eigenen Wert fest, und wie erlebst du ihn in unterschiedlichen Situationen?"
             ];
 
-            const cleanText = `Starte bitte meinen persönlichen Seelenspiegel und begrüße mich herzlich mit: „Herzlich willkommen zu deinem persönlichen Seelenspiegel. Schön, dass du dir diese Zeit für dich nimmst.“ Führe mich danach Schritt für Schritt durch die folgenden 15 Fragen:\n\n` + questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
+            const cleanText = `Starte bitte meinen persönlichen Seelenspiegel. Begrüße mich zuerst herzlich mit: „Herzlich willkommen zu deinem persönlichen Seelenspiegel. Schön, dass du dir diese Zeit für dich nimmst.“\n\nFühre mich danach streng schrittweise durch die folgenden 15 Fragen. Stelle mir IMMER NUR DIE AKTUELLE FRAGE und warte auf meine Antwort, bevor du zur nächsten übergehst. Zeige mir niemals alle Fragen auf einmal.\n\nHier sind die Fragen zur internen Orientierung:\n` + questions.map((q, i) => `${i + 1}. ${q}`).join('\n');
 
             navigator.clipboard.writeText(cleanText).then(() => {
                 const toast = document.getElementById('toast');
