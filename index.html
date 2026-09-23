@@ -121,15 +121,16 @@
 
     <script>
         function copyPrompt() {
+            // Hier ist nun absolut sauber nur der Einstieg ohne jegliche Fragenliste hinterlegt.
             const cleanText = `Starte bitte meinen persönlichen Seelenspiegel. 
 
 Begrüße mich zuerst herzlich mit genau diesen Worten:
 „Herzlich willkommen zu deinem persönlichen Seelenspiegel. Schön, dass du dir diese Zeit für dich nimmst.“
 
-Deine Aufgabe ist es, mich durch insgesamt 15 persönliche Fragen zu führen. Stelle mir jetzt bitte DIREKT ALS ERSTES NUR DIE ERSTE FRAGE:
+Deine Aufgabe ist es, mich durch insgesamt 15 tiefgründige persönliche Fragen zu führen, und zwar streng nacheinander. Stelle mir jetzt bitte DIREKT ALS ERSTES NUR DIE ERSTE FRAGE:
 „Welcher Satz beschreibt am besten, wie du dich selbst siehst?“
 
-Warte danach auf meine Antwort. Zeige mir keinesfalls die anderen Fragen im Voraus. Nach meiner Antwort fragst du mich nach und nach nach den weiteren Schritten. Bist du bereit?`;
+Warte danach unbedingt auf meine Antwort. Zeige mir keine weiteren Fragen im Voraus. Sobald ich antworte, stellst du mir die nächste Frage. Bist du bereit?`;
 
             navigator.clipboard.writeText(cleanText).then(() => {
                 const toast = document.getElementById('toast');
