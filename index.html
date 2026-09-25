@@ -76,11 +76,12 @@
 
     <div class="container">
         <h1>Da ist noch mehr.</h1>
-        <p>Dein persönlicher Seelenspiegel wartet auf dich. Kopiere einfach den folgenden Start-Prompt und füge ihn in ChatGPT ein:</p>
+        <p>Dein persönlicher Seelenspiegel wartet auf dich. Kopiere einfach den Start-Befehl und füge ihn in ChatGPT ein:</p>
 
-        <div class="prompt-box" id="promptText">Starte bitte meinen persönlichen Seelenspiegel.</div>
+        <!-- Das sieht der Nutzer auf der Webseite -->
+        <div class="prompt-box">Starte bitte meinen persönlichen Seelenspiegel.</div>
 
-        <button class="btn" onclick="copyPrompt()">Prompt in Zwischenablage kopieren</button>
+        <button class="btn" onclick="copyFullPrompt()">Prompt in Zwischenablage kopieren</button>
 
         <div class="instructions">
             <strong>So funktioniert's:</strong>
@@ -93,10 +94,13 @@
     </div>
 
     <script>
-        function copyPrompt() {
-            const text = document.getElementById("promptText").innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Prompt wurde in die Zwischenablage kopiert!");
+        function copyFullPrompt() {
+            // HIER TRÄGST DU DEN VOLLSTÄNDIGEN, LANGEN KI-PROMPT EIN, 
+            // der im Hintergrund in die Zwischenablage geladen werden soll:
+            const fullPromptText = `Starte bitte meinen persönlichen Seelenspiegel. [Hier kommt dein kompletter, langer Prompt-Text rein, den ChatGPT braucht, um die Regeln zu verstehen...]`;
+
+            navigator.clipboard.writeText(fullPromptText).then(() => {
+                alert("Der vollständige Seelenspiegel-Prompt wurde in die Zwischenablage kopiert!");
             }).catch(err => {
                 console.error("Fehler beim Kopieren: ", err);
             });
