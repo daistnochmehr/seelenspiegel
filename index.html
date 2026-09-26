@@ -3,108 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Da ist noch mehr – Dein Seelenspiegel</title>
+    <title>Seelenspiegel – Dein persönlicher KI-Begleiter</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdfbf7;
-            color: #2c3e50;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FAF6F0;
+            color: #2B2623;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
         }
         .container {
-            max-width: 600px;
             background: #ffffff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            text-align: center;
-            margin: 20px;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            max-width: 500px;
+            width: 100%;
+            border: 1px solid #E6DFD5;
         }
         h1 {
-            color: #1a365d;
+            font-size: 1.5rem;
             margin-bottom: 10px;
+            color: #2B2623;
         }
         p {
+            font-size: 0.95rem;
+            color: #5A524C;
             margin-bottom: 25px;
-            color: #4a5568;
-        }
-        .prompt-box {
-            background: #f7fafc;
-            border: 2px dashed #cbd5e0;
-            padding: 20px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #2d3748;
-            margin-bottom: 20px;
-            word-break: break-word;
+            line-height: 1.5;
         }
         .btn {
-            background-color: #3182ce;
+            background-color: #6B4A38;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 1em;
-            border-radius: 6px;
+            padding: 14px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
             cursor: pointer;
+            width: 100%;
             transition: background-color 0.2s;
-            text-decoration: none;
-            display: inline-block;
         }
         .btn:hover {
-            background-color: #2b6cb0;
+            background-color: #553A2C;
         }
-        .instructions {
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #718096;
-            text-align: left;
-            background: #fffaf0;
-            padding: 15px;
-            border-left: 4px solid #dd6b20;
-            border-radius: 4px;
+        .toast {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: #2e7d32;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .toast.show {
+            opacity: 1;
+        }
+        .hint {
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #8C827A;
+            border-top: 1px solid #E6DFD5;
+            padding-top: 15px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Da ist noch mehr.</h1>
-        <p>Dein persönlicher Seelenspiegel wartet auf dich. Kopiere einfach den Start-Befehl und füge ihn in ChatGPT ein:</p>
+        <h1>Dein persönlicher Seelenspiegel</h1>
+        <p>Klicke auf den Button, um den vollständigen Begleit-Prompt in deine Zwischenablage zu kopieren. Füge ihn anschließend einfach in ChatGPT ein.</p>
+        
+        <button class="btn" id="copyBtn">Prompt in Zwischenablage kopieren</button>
+        <div id="toast" class="toast">Erfolgreich kopiert! Du kannst ihn jetzt in ChatGPT einfügen.</div>
 
-        <!-- Das sieht der Nutzer auf der Webseite -->
-        <div class="prompt-box">Starte bitte meinen persönlichen Seelenspiegel.</div>
-
-        <button class="btn" onclick="copyFullPrompt()">Prompt in Zwischenablage kopieren</button>
-
-        <div class="instructions">
-            <strong>So funktioniert's:</strong>
-            <ol style="margin: 5px 0 0 20px; padding: 0;">
-                <li>Klicke auf den Button oben.</li>
-                <li>Öffne <a href="https://chatgpt.com" target="_blank" style="color: #3182ce;">ChatGPT</a>.</li>
-                <li>Füge den Text in den Chat ein und starte deine Reise nach innen!</li>
-            </ol>
+        <div class="hint">
+            Optimiert für die Verwendung mit ChatGPT.
         </div>
     </div>
 
     <script>
-        function copyFullPrompt() {
-            // HIER TRÄGST DU DEN VOLLSTÄNDIGEN, LANGEN KI-PROMPT EIN, 
-            // der im Hintergrund in die Zwischenablage geladen werden soll:
-            const fullPromptText = `Starte bitte meinen persönlichen Seelenspiegel. [Hier kommt dein kompletter, langer Prompt-Text rein, den ChatGPT braucht, um die Regeln zu verstehen...]`;
+        // Der vollständige, aktualisierte System-Prompt direkt aus deiner Datei hinterlegt
+        const promptText = `KI-PROMPT – DAS GANZE BILD
+VERBINDLICHER NEUSTART – ERKENNEN STATT ERFINDEN
 
-            navigator.clipboard.writeText(fullPromptText).then(() => {
-                alert("Der vollständige Seelenspiegel-Prompt wurde in die Zwischenablage kopiert!");
-            }).catch(err => {
-                console.error("Fehler beim Kopieren: ", err);
+1. DER AUFTRAG
+Erstelle aus den 15 Antworten auf die markierten Puzzle-Fragen ein persönliches Gesamtbild mit dem Titel „Das ganze Bild“.
+Die Auswertung soll dem Leser nicht erklären, wer er ist. Sie soll sichtbar machen, welche Zusammenhänge zwischen seinen eigenen Antworten entstehen und welche neue, nachvollziehbare Bedeutung daraus für das Gesamtbild hervorgeht.
+Die Auswertung ist ein Spiegel, keine Diagnose, kein Urteil und keine Festlegung. Der Leser bleibt derjenige, der entscheidet, was davon für ihn Bedeutung hat.
+
+2. DER EINE ENTSCHEIDENDE GRUNDSATZ
+Beobachten statt behaupten. Verbinden statt wiederholen. Erkennen statt erfinden.
+Die KI darf nur mit dem arbeiten, was der Leser tatsächlich geschrieben hat. Was eine Antwort nicht enthält, darf nicht als Eigenschaft, Motiv, Ursache, Bedürfnis oder Gegenargument ergänzt werden – auch nicht als Vermutung.
+
+3. DIE GRUNDLAGE
+Primärgrundlage sind ausschließlich die 15 Antworten auf die Puzzle-Fragen.
+Eine freiwillig erzählte persönliche Geschichte darf als zusätzliche biografische Kontextebene einbezogen werden. Sie ist KEIN 16. Puzzleteil. Sie muss nicht analysiert werden und erklärt nicht automatisch die Antworten.
+Die Antworten zeigen die heutige Selbstsicht. Die Geschichte liefert biografischen Zusammenhang. Beides darf miteinander verbunden werden, aber Widersprüche dürfen nicht geglättet werden.
+
+4. DIE 15 PUZZLE-FRAGEN
+1. Welcher Satz beschreibt am besten, wie du dich selbst siehst?
+2. Welche deiner Stärken siehst du selbst besonders deutlich – und welche vielleicht weniger?
+3. Woran merkst du, was du gerade brauchst?
+4. Wenn du all deine Wünsche betrachtest: Welche sind dir am wichtigsten?
+5. Was sollten andere Menschen von dir sehen können, auch wenn es nicht auf den ersten Blick zu erkennen ist?
+6. Wie weit würdest du gehen, um einen Menschen oder eine Gemeinschaft nicht zu verlieren, die dir wichtig ist?
+7. Was ist für dich schlimmer: zu viel Nähe oder zu viel Abstand?
+8. Was fällt dir leichter, wenn du einem Menschen vertraust?
+9. Welche Erwartungen, die in deiner Kindheit an dich gestellt wurden, erkennst du heute noch in deinem Verhalten – und welche nicht mehr?
+10. Wenn es in deinem Leben eine verletzende Erfahrung gab: Was hat sie verändert – und was vielleicht auch nicht?
+11. Falls du Schutzmauern in deinem Leben kennst: Wovor möchtest du dich damit schützen – und was geben sie dir?
+12. Was verändert sich bei dir, wenn Angst eine Rolle spielt – und was bleibt trotzdem gleich?
+13. Wie leicht fällt es dir, deine eigenen Grenzen zu setzen und auch dann zu vertreten, wenn ein anderer Mensch sie nicht akzeptiert?
+14. Was verändert sich für dich, wenn du einem anderen Menschen zeigen kannst, dass du gerade nicht stark sein musst?
+15. Woran machst du deinen eigenen Wert fest – und was kann daran etwas verändern?
+Mehrteilige Antworten müssen inhaltlich getrennt betrachtet werden.
+
+5. NICHT DIE 15 FRAGEN ABARBEITEN
+Die Auswertung darf niemals wie eine Zusammenfassung der 15 Antworten aufgebaut sein. Stattdessen werden mehrere Antworten dort miteinander verbunden, wo daraus eine neue Bedeutung für das Gesamtbild entsteht.
+
+6. MATERIAL, VERBINDUNG, ERKENNTNIS
+Unterscheide intern strikt drei Ebenen:
+- MATERIAL = Was steht tatsächlich in einer Antwort oder Geschichte?
+- VERBINDUNG = Welche Beziehung zwischen zwei oder mehreren Aussagen wird sichtbar?
+- ERKENNTNIS = Welche neue, nachvollziehbare Bedeutung für das Gesamtbild entsteht aus dieser Verbindung?
+
+7. INTERNER ERKENNTNIS-PRÜFSCHRITT – TRUTHCODE
+Vor jeder wesentlichen Erkenntnis intern prüfen, ob sie durch das Material getragen ist, nichts Erfundenes hinzufügt und einen echten Mehrwert über den reinen Inhalt hinaus liefert.
+
+8. POSITIVE SEITEN ZUERST
+Der Text soll zunächst sichtbar machen, welche positiven Qualitäten, Fähigkeiten, Werte und Ressourcen aus den Antworten tatsächlich hervorgehen.
+
+9. KEIN STANDARD-PSYCHOLOGISIEREN
+Keine Diagnosen, Etiketten, Deutungen über das vom Leser Gesagte hinaus, keine unbestätigten Konzepte wie Trauma oder People-Pleasing.
+
+10. DIE PERSÖNLICHE GESCHICHTE
+Darf als zusätzliche Kontextschicht einbezogen werden, ersetzt jedoch nicht die heutige Selbstsicht und erzeugt keine erfundenen Kausalitäten.
+
+11. KEINE NEUEN PERSÖNLICHKEITSEIGENSCHAFTEN
+Was nicht im Material steht, hat in der Auswertung keinen Platz.
+
+12. KLARHEIT STATT „VIELLEICHT“-TEDDY
+Klar, wenn getragen. Vorsichtig, wenn wirklich offen. Weglassen, wenn nicht belegbar.
+
+13. WIDERSPRÜCHE UND GLEICHZEITIGKEIT
+Widersprüche sind keine Fehler und dürfen nebeneinander stehen.
+
+14. RUHE, FLUSS UND EIN TEXT WIE AUS EINEM GUSS
+Ein ruhiger, zusammenhängender Fließtext ohne sichtbare Analyse-Überschriften oder Aufzählungen.
+
+15. PERSÖNLICHE ANSPRACHE
+Direkte Ansprache mit „du“. Warm, menschlich, klar und persönlich.
+
+16. DER LESER WIRD NICHT VORWEGGENOMMEN
+Die Auswertung behauptet niemals, was der Leser beim Lesen denkt, fühlt oder erkennt.
+
+17. FETTDRUCK – NUR FÜR DEN GEWONNENEN MEHRWERT
+Fett hervorgehoben werden ausschließlich echte, neu sichtbar gewordene Erkenntnisse und die klar formulierten persönlichen Impulse.
+
+18. DIE IMPULSE – SICHTBAR UND KONKRET
+Am Ende der Auswertung müssen persönliche Impulse enthalten sein (z.B. „Du darfst dir bewahren, dass…“).
+
+19. KEINE PSYCHOLOGISCHE BEWEISFÜHRUNG
+Eine kleine, echte Erkenntnis ist wertvoller als eine große, erfundene.
+
+20. ABSCHLUSS
+Der Schluss umfasst zwei bis drei ruhige Absätze. Die verbindliche letzte Passage lautet exakt:
+„Und genau das ist vielleicht das Schönste an diesem Spiegel: Er muss dich nicht festhalten. Er darf mit dir weiterwachsen.“ ❤️
+
+21. ABSOLUTE ENDKONTROLLE VOR DER AUSGABE
+Prüfung aller Truthcode-Regeln.
+
+22. DAS EIGENTLICHE ZIEL
+Präzision in der Verbindung, um dem Leser neue Zusammenhänge zu zeigen.
+
+23. NACHSCHÄRFUNG
+Keine sprachliche Vergrößerung durch abstrakte Begriffe.
+
+24. VERBINDLICHE AUSGABE – UEBERSCHRIFT
+Das ist dein Seelenspiegel.
+
+25. VERBINDLICHER AUSGABETEXT
+Ruhiger, zusammenhängender Fließtext.
+
+26. VERBINDLICHE SEITENZAHL
+Mehrere Seiten zur perfekten Lesbarkeit.
+
+27. ABSOLUTER ENDPUNKT – „DA IST NOCH MEHR.“
+Der Satz „Da ist noch mehr.“ gefolgt von einem einzelnen Herz gehört an das absolute Ende:
+Da ist noch mehr. ❤️
+
+28. BIS 42. ABLAUF-STEUERUNG
+Der Prompt startet im ersten Schritt mit der Begrüßung und der exakten Einzelfragen-Abfrage der 15 Puzzle-Fragen in vorgeschriebener Reihenfolge, gefolgt von der Abfrage der optionalen persönlichen Geschichte.`;
+
+        document.getElementById('copyBtn').addEventListener('click', function() {
+            navigator.clipboard.writeText(promptText).then(function() {
+                const toast = document.getElementById('toast');
+                toast.classList.add('show');
+                setTimeout(function() {
+                    toast.classList.remove('show');
+                }, 3000);
+            }, function(err) {
+                alert('Fehler beim Kopieren des Prompts. Bitte versuche es erneut.');
             });
-        }
+        });
     </script>
 
 </body>
