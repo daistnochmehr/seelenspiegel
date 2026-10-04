@@ -8,15 +8,15 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px 20px;
+            padding: 40px 20px;
             background-color: #f4f4f9;
             color: #333;
         }
         .container {
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
@@ -24,25 +24,39 @@
             display: inline-block;
             background-color: #10a37f;
             color: white;
-            padding: 16px 28px;
-            font-size: 18px;
+            padding: 15px 25px;
+            font-size: 16px;
             font-weight: bold;
             text-decoration: none;
             border-radius: 8px;
             border: none;
             cursor: pointer;
             width: 100%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            margin-top: 15px;
         }
         .btn:hover {
             background-color: #0e8c6d;
         }
-        .status {
-            margin-top: 20px;
-            font-size: 15px;
+        textarea {
+            width: 100%;
+            height: 120px;
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 13px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #fafafa;
+            display: none;
+        }
+        .instructions {
+            margin-top: 15px;
+            font-size: 14px;
             color: #0d6833;
             display: none;
-            font-weight: bold;
+            text-align: left;
+            background: #e6f4ea;
+            padding: 12px;
+            border-radius: 6px;
         }
     </style>
 </head>
@@ -50,31 +64,42 @@
 
     <div class="container">
         <h2>Dein Seelenspiegel</h2>
-        <p style="margin-bottom: 25px; color: #666;">Klicke auf den Button, um den Prompt zu kopieren und ChatGPT zu starten.</p>
+        <p>Klicke auf den Button, um den Prompt für ChatGPT bereitzustellen.</p>
         
         <!-- Der Button -->
-        <button class="btn" onclick="copyAndOpen()">Prompt in Zwischenablage kopieren</button>
+        <button class="btn" onclick="showPrompt()">Prompt in Zwischenablage kopieren</button>
         
-        <!-- Erfolgsanzeige -->
-        <div id="statusMsg" class="status">Kopiert! ChatGPT öffnet sich...</div>
+        <!-- Das Textfeld (bleibt unsichtbar, bis man klickt) -->
+        <textarea id="myPromptBox" readonly></textarea>
+
+        <!-- Anweisung nach dem Klick -->
+        <div id="instructionBox" class="instructions">
+            <strong>Fast geschafft!</strong><br>
+            1. Markiere den Text oben oder tippe auf "Kopieren".<br>
+            2. Öffne ChatGPT und füge ihn dort ein.
+            <br><br>
+            <a href="https://chatgpt.com" target="_blank" class="btn" style="text-align:center; display:block; text-decoration:none;">ChatGPT jetzt öffnen</a>
+        </div>
     </div>
 
     <script>
-        function copyAndOpen() {
-            // HIER DEINEN KOMPLETTEN PROMPT EINFÜGEN (zwischen die Anführungszeichen ``):
-            const secretPrompt = `Hier kommt dein kompletter Seelenspiegel-Prompt rein. Er steht niemals im Link und ist auf der Website unsichtbar!`;
+        function showPrompt() {
+            // HIER DEINEN KOMPLETTEN PROMPT EINFÜGEN:
+            const secretPrompt = `Hier kommt dein kompletter Seelenspiegel-Prompt rein. Er steht niemals im Link!`;
 
-            // Kopiert den Text unsichtbar in den Hintergrund-Speicher des Handys
-            navigator.clipboard.writeText(secretPrompt).then(() => {
-                document.getElementById('statusMsg').style.display = 'block';
-                
-                // Öffnet die saubere ChatGPT-Startseite nach kurzer Verzögerung
-                setTimeout(function() {
-                    window.location.href = 'https://chatgpt.com';
-                }, 800);
-            }).catch(err => {
-                alert('Bitte tippe einmal kurz auf den Bildschirm und versuche es noch einmal.');
-            });
+            const box = document.getElementById('myPromptBox');
+            box.value = secretPrompt;
+            box.style.display = 'block';
+            box.select();
+            
+            document.getElementById('instructionBox').style.display = 'block';
+
+            // Versuche zusätzlich, ihn in die Zwischenablage zu drücken
+            try {
+                navigator.clipboard.writeText(secretPrompt);
+            } catch (e) {
+                // Ignorieren, falls Handy es blockiert, da das Textfeld da ist
+            }
         }
     </script>
 
