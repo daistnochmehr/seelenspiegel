@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
             background-color: #f4f4f9;
             color: #333;
         }
@@ -16,49 +16,63 @@
             max-width: 600px;
             margin: 0 auto;
             background: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         h1 {
             color: #10a37f;
+            font-size: 22px;
             margin-bottom: 10px;
         }
         p {
-            font-size: 16px;
-            line-height: 1.5;
+            font-size: 15px;
+            line-height: 1.4;
             color: #555;
         }
         .btn {
             display: inline-block;
             background-color: #10a37f;
             color: white;
-            padding: 16px 32px;
-            font-size: 18px;
+            padding: 14px 24px;
+            font-size: 16px;
             font-weight: bold;
             text-decoration: none;
             border-radius: 6px;
-            margin-top: 25px;
+            margin-top: 15px;
             cursor: pointer;
             border: none;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            width: 100%;
         }
         .btn:hover {
             background-color: #0e8c6d;
         }
-        .success-box {
-            display: none;
-            margin-top: 25px;
+        textarea {
+            width: 100%;
+            height: 80px;
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            resize: none;
+            background: #fafafa;
+        }
+        .step-box {
+            margin-top: 20px;
             padding: 15px;
             background: #e6f4ea;
             border: 1px solid #10a37f;
             border-radius: 6px;
-            font-size: 15px;
+            text-align: left;
+            font-size: 14px;
             color: #0d6833;
+            display: none;
         }
         .hint {
-            margin-top: 20px;
-            font-size: 13px;
+            margin-top: 15px;
+            font-size: 12px;
             color: #777;
         }
     </style>
@@ -67,37 +81,47 @@
 
     <div class="container">
         <h1>Dein Seelenspiegel</h1>
-        <p>Klicke auf den Button, um den Prompt für den Seelenspiegel in deinen Speicher zu laden.</p>
+        <p>Klicke auf den Button, um den Prompt für die Zwischenablage bereitzustellen.</p>
         
-        <!-- Der Button exakt nach deiner Buch-Anleitung -->
-        <button class="btn" onclick="copyPrompt()">Prompt in Zwischenablage kopieren</button>
+        <!-- Der Button -->
+        <button class="btn" onclick="preparePrompt()">Prompt in Zwischenablage kopieren</button>
         
-        <!-- Die Bestätigung nach dem Klick -->
-        <div id="successBox" class="success-box">
-            <strong>Erfolgreich kopiert!</strong> ChatGPT öffnet sich gleich. Füge den Text dort einfach mit <strong>Strg + V</strong> (am Handy: kurz ins Eingabefeld tippen und "Einfügen" wählen) ein.
+        <!-- Ein verstecktes Textfeld als sicherer Anker für Handys -->
+        textarea id="promptField" readonly style="display:none;"></textarea>
+
+        <!-- Die Box die nach dem Klick erscheint -->
+        <div id="instructionBox" class="step-box">
+            <strong>Fast geschafft!</strong> 
+            <ol style="margin: 5px 0 0 15px; padding: 0;">
+                Der Text wurde kopiert. 
+                <li>Klicke unten, um ChatGPT zu öffnen.</li>
+                <li>Füge den Text dort mit <strong>Einfügen (Strg+V bzw. lang antippen)</strong> ein.</li>
+            </ol>
+            <a href="https://chatgpt.com" target="_blank" class="btn" style="margin-top: 12px; text-align: center;">ChatGPT jetzt öffnen</a>
         </div>
         
-        <p class="hint">*(Hinweis: Du benötigst ein kostenloses ChatGPT-Konto.)*</p>
+        <p class="hint">*(Der Link im Buch enthält zu 0% den Prompt.)*</p>
     </div>
 
     <script>
-        function copyPrompt() {
-            // HIER TRÄGST DU DEINEN PROMPT EIN:
-            const secretPrompt = `Hier kommt dein kompletter Seelenspiegel-Prompt rein. Er steht niemals im Link und wird erst durch diesen Klick unsichtbar in den Speicher geladen!`;
+        function preparePrompt() {
+            // HIER DEINEN PROMPT EINTRAGEN:
+            const secretPrompt = `Hier kommt dein kompletter Seelenspiegel-Prompt rein. Er steht niemals im Link!`;
 
-            // Kopiert den Prompt unsichtbar in die Zwischenablage des Geräts
-            navigator.clipboard.writeText(secretPrompt).then(() => {
-                // Zeigt die Bestätigung auf der Seite
-                document.getElementById('successBox').style.display = 'block';
-                
-                // Öffnet ChatGPT nach 1 Sekunde in einem neuen Tab
-                setTimeout(function() {
-                    window.open('https://chatgpt.com', '_blank');
-                }, 1000);
-            }).catch(err => {
-                alert('Fehler beim Kopieren. Bitte tippe manuell auf den Text.');
-                console.error(err);
-            });
+            const txtArea = document.getElementById('promptField');
+            txtArea.style.display = 'block';
+            txtArea.value = secretPrompt;
+            txtArea.select();
+            txtArea.setSelectionRange(0, 99999); // Für mobile Geräte
+
+            try {
+                navigator.clipboard.writeText(secretPrompt);
+            } catch (err) {
+                console.log('Clipboard fallback aktiv');
+            }
+
+            // Zeigt die klare Anweisungs-Box mit dem sauberen ChatGPT-Link
+            document.getElementById('instructionBox').style.display = 'block';
         }
     </script>
 
