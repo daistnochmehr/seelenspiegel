@@ -3,159 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seelenspiegel – Dein KI-Begleiter</title>
+    <title>Dein Seelenspiegel</title>
     <style>
-        :root {
-            --bg-color: #FAF6F0;
-            --container-bg: #FFFFFF;
-            --text-color: #2B2623;
-            --accent-color: #6B4A38;
-            --accent-hover: #54382A;
-            --border-color: #E6DFD5;
-        }
-
         body {
-            font-family: 'Georgia', serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .card {
-            background-color: var(--container-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            max-width: 600px;
-            width: 100%;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(43, 38, 35, 0.05);
+            font-family: Arial, sans-serif;
             text-align: center;
-            box-sizing: border-box;
+            padding: 40px 20px;
+            background-color: #f4f4f9;
+            color: #333;
         }
-
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--text-color);
+            color: #10a37f;
+            margin-bottom: 10px;
         }
-
         p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            color: #554D47;
+            font-size: 16px;
+            line-height: 1.5;
+            color: #555;
         }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
         .btn {
-            background-color: var(--accent-color);
-            color: #FFFFFF;
-            border: none;
-            border-radius: 6px;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-family: 'Georgia', serif;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            width: 100%;
-            max-width: 320px;
-            text-decoration: none;
             display: inline-block;
-            box-sizing: border-box;
+            background-color: #10a37f;
+            color: white;
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 25px;
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background 0.2s;
         }
-
         .btn:hover {
-            background-color: var(--accent-hover);
+            background-color: #0e8c6d;
         }
-
-        .btn:active {
-            transform: scale(0.98);
+        .instruction-box {
+            display: none;
+            margin-top: 25px;
+            padding: 15px;
+            background: #e6f4ea;
+            border: 1px solid #10a37f;
+            border-radius: 6px;
+            font-size: 15px;
+            color: #0d6833;
         }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--accent-color);
-            border: 2px solid var(--accent-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(107, 74, 56, 0.05);
-        }
-
-        .toast {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            color: #2e7d32;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            height: 20px;
-        }
-
-        .toast.visible {
-            opacity: 1;
+        .hint {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #777;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
+    <div class="container">
         <h1>Dein Seelenspiegel</h1>
-        <p>Schön, dass du da bist und deinen Seelenspiegel erstellen möchtest. Klicke auf den Button, füge den Text in ChatGPT ein und starte deinen persönlichen Reflexionsweg.</p>
+        <p>Klicke auf den Button, um den Seelenspiegel zu starten. Dein Prompt wird dabei automatisch für dich vorbereitet.</p>
         
-        <div class="btn-group">
-            <button class="btn" id="copyBtn">Prompt kopieren</button>
-            <a href="https://chatgpt.com/" target="_blank" class="btn btn-secondary">Mit ChatGPT starten</a>
+        <!-- Der magische Button -->
+        <button class="btn" onclick="openSeelenspiegel()">Seelenspiegel jetzt starten</button>
+        
+        <!-- Die unsichtbare Info, die nach dem Klick erscheint -->
+        <div id="infoBox" class="instruction-box">
+            <strong>Fast geschafft!</strong> ChatGPT öffnet sich gleich. Drücke dort einfach kurz <strong>Strg + V</strong> (am Handy: kurz ins Eingabefeld tippen und "Einfügen" wählen), um deinen Seelenspiegel zu starten.
         </div>
-
-        <div class="toast" id="toastMessage">Start-Befehl kopiert! Füge ihn jetzt in ChatGPT ein.</div>
+        
+        <p class="hint">*(Hinweis: Du benötigst ein kostenloses ChatGPT-Konto.)*</p>
     </div>
 
-    <!-- Exakter Start-Befehl für den Klick in die Zwischenablage -->
-    <textarea id="promptText" style="position: absolute; left: -9999px;">Du bist ein einfühlsamer KI-Begleiter für den persönlichen Seelenspiegel „Das ganze Bild“. 
-
-Führe bitte exakt diesen Start aus:
-1. Antworte als allererstes mit genau diesem Satz:
-„Schön, dass du da bist und deinen Seelenspiegel erstellen möchtest.“
-2. Stelle unmittelbar danach genau diese erste Puzzle-Frage:
-„Welcher Satz beschreibt am besten, wie du dich selbst siehst?“
-3. Warte danach zwingend auf meine Antwort und stelle noch keine weiteren Fragen.</textarea>
-
     <script>
-        document.getElementById('copyBtn').addEventListener('click', function() {
-            const textarea = document.getElementById('promptText');
-            textarea.select();
-            textarea.setSelectionRange(0, 99999);
+        function openSeelenspiegel() {
+            // HIER TRÄGST DU DEINEN PROMPT EIN:
+            const secretPrompt = `Hier kommt dein kompletter Seelenspiegel-Prompt rein. Er ist im Quelltext versteckt, aber niemals im Link, den der Leser verschickt!`;
 
-            try {
-                navigator.clipboard.writeText(textarea.value).then(function() {
-                    showToast();
-                }, function() {
-                    document.execCommand('copy');
-                    showToast();
-                });
-            } catch (err) {
+            // 1. Kopiert den Prompt unsichtbar in die Zwischenablage des Lesers
+            navigator.clipboard.writeText(secretPrompt).then(() => {
+                // Zeigt die kurze Handlungsanweisung an
+                document.getElementById('infoBox').style.display = 'block';
+            }).catch(err => {
                 console.error('Fehler beim Kopieren: ', err);
-            }
-        });
+            });
 
-        function showToast() {
-            const toast = document.getElementById('toastMessage');
-            toast.classList.add('visible');
+            // 2. Öffnet ChatGPT in einem neuen Tab
             setTimeout(function() {
-                toast.classList.remove('visible');
-            }, 3000);
+                window.open('https://chatgpt.com', '_blank');
+            }, 500);
         }
     </script>
+
 </body>
 </html>
