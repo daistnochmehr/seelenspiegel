@@ -66,23 +66,28 @@
         <h1>Dein Seelenspiegel</h1>
         <p>Klicke auf den Button, um den Prozess zu starten.</p>
         
-        <!-- Der Button exakt nach der Anleitung im Buch -->
+        <!-- Der Button exakt nach deiner Buch-Anleitung -->
         <button class="btn" onclick="copyPrompt()">Prompt in Zwischenablage kopieren</button>
         
-        <!-- Die Bestätigung und der nächste Schritt wie im Buch beschrieben -->
+        <!-- Die Bestätigung nach dem Klick -->
         <div id="successBox" class="success-box">
             <strong>Erfolgreich kopiert!</strong><br>
-            Öffne nun ChatGPT und füge den Prompt dort ein.<br><br>
+            Öffne nun ChatGPT und füge den Text dort ein.<br><br>
             <a href="https://chatgpt.com" target="_blank" class="btn" style="text-align:center; display:block;">ChatGPT öffnen</a>
         </div>
     </div>
 
     <script>
         function copyPrompt() {
-            // HIER DEINEN VOLLSTÄNDIGEN SEELENSPIEGEL-PROMPT EINFÜGEN:
-            const secretPrompt = `Hier kommt dein kompletter Seelenspiegel-Prompt rein. Er ist absolut unsichtbar im Code versteckt und taucht in keinem Link auf!`;
+            // HIER TRÄGST DU DEINEN VOLLSTÄNDIGEN PROMPT EIN.
+            // Am Ende des Prompts steht genau deine Vorgabe, sodass der Nutzer im Chat nur das sieht:
+            const secretPrompt = `Hier kommt dein kompletter 5-Seiten-Prompt hin (alle Regeln, Anweisungen etc. für die KI). 
 
-            // Kopiert den Text unsichtbar in die Zwischenablage des Geräts
+Schließe den Text ganz unten mit genau diesen Zeilen ab:
+Schön, dass du deinen Seelenspiegel anschauen magst. 
+1. [Hier folgt deine erste Frage]`;
+
+            // Kopiert den Prompt unsichtbar in die Zwischenablage
             navigator.clipboard.writeText(secretPrompt).then(() => {
                 document.getElementById('successBox').style.display = 'block';
             }).catch(err => {
