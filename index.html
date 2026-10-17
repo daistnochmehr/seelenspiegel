@@ -1,10 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dein Seelenspiegel – Auswertung mit ChatGPT</title>
-
     <style>
         :root {
             --bg-color: #FAF6F0;
@@ -69,4 +69,177 @@
             font-size: 1.1rem;
             font-family: Georgia, serif;
             cursor: pointer;
-            transition: background-color 0.2s,
+            transition: background-color 0.2s, transform 0.1s;
+            width: 100%;
+            max-width: 320px;
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(107, 74, 56, 0.05);
+        }
+
+        .toast {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #2e7d32;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            min-height: 20px;
+        }
+
+        .toast.visible {
+            opacity: 1;
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 12px;
+            }
+
+            .card {
+                padding: 28px 20px;
+            }
+
+            h1 {
+                font-size: 1.55rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <main class="card">
+        <h1>Dein Seelenspiegel</h1>
+
+        <p>
+            Du hast die 15 Puzzle-Fragen in deinem Buch beantwortet?
+            Kopiere die Auswertungsanweisung und öffne ChatGPT.
+            Füge die Anweisung zusammen mit deinen 15 Antworten und –
+            wenn du möchtest – deiner persönlichen Lebensgeschichte
+            in <strong>eine Nachricht</strong> ein und sende sie ab.
+            ChatGPT erstellt daraus deinen persönlichen Seelenspiegel.
+        </p>
+
+        <div class="btn-group">
+            <button class="btn" id="copyBtn" type="button">
+                Anweisung kopieren
+            </button>
+
+            <a
+                href="https://chatgpt.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary"
+                id="chatBtn"
+            >
+                Mit ChatGPT starten
+            </a>
+        </div>
+
+        <div
+            class="toast"
+            id="toastMessage"
+            role="status"
+            aria-live="polite"
+        ></div>
+    </main>
+
+    <!-- Auswertungsanweisung: unsichtbar, wird über die Buttons kopiert -->
+    <textarea id="promptText" style="position:absolute;left:-9999px;" aria-hidden="true" tabindex="-1">SEELENSPIEGEL – TRUTHCODE
+
+Erstelle aus meinen 15 Puzzle-Antworten und meiner freiwilligen Lebensgeschichte einen persönlichen Seelenspiegel. Nutze alle Angaben aus dieser oder unmittelbar vorherigen Nachrichten. Stelle keine Rückfragen und beginne nicht erneut mit den Puzzle-Fragen. Ausgelassene oder mit „Weiß ich nicht“ beantwortete Fragen bleiben offen; werte das vorhandene Material trotzdem aus.
+
+Schreibe direkt den fertigen Text: warm, ruhig, menschlich und klar in der Du-Form. Beginne mit konkret belegten Stärken. Verbinde die Antworten zu einem Gesamtbild, statt sie Frage für Frage zusammenzufassen. Jeder Absatz muss einen neuen Gedanken voranbringen; wiederhole keine Aussage nur mit anderen Worten.
+
+TRUTHCODE: Nutze ausschließlich tatsächlich Gesagtes. Erfinde keine Eigenschaften, Motive, Bedürfnisse oder Ursachen. Keine Diagnosen, Etiketten oder pauschale Psychologie. Die Lebensgeschichte ergänzt den Kontext, beweist aber nicht automatisch, woher ein heutiges Verhalten stammt. Bewahre Widersprüche und unterschiedliche Seiten. Eine Erkenntnis muss durch konkrete Aussagen getragen sein und eine neue, nachvollziehbare Bedeutung zeigen. Schwache oder spekulative Verbindungen lässt du weg.
+
+Gib nur den fertigen Seelenspiegel aus: keine Prüfschritte, Methodenkommentare oder Erklärungen darüber, was du bewusst nicht ableitest. Keine Listen, Analyse-Überschriften oder Frage-für-Frage-Auswertung. Einzige Überschrift: „Das ist dein Seelenspiegel.“ Hebe echte neue Erkenntnisse sparsam hervor.
+
+IMPULSE: Ein Impuls ist weder Rat noch Wiederholung. Nimm ihn nur auf, wenn er einen eigenständigen, persönlichen und belegbaren Gedanken enthält, der weder im Haupttext noch in einem anderen Impuls vorkommt. Vergleiche jeden Impuls mit dem gesamten Text und den übrigen Impulsen; streiche jede bloße Umformulierung. Schreibe kurz und natürlich: ein klarer Gedanke, keine verschachtelten Erklärungen. Keine Aufforderungen („du solltest/musst/darfst“), Kalendersprüche, allgemeinen Lebensweisheiten, künstlichen Gegensätze oder angehängten Erklärungen. Keine feste Anzahl. Gibt es keinen eigenständigen Impuls, entfällt der Abschnitt vollständig.
+
+Beende den Text mit zwei bis drei ruhigen, nicht wiederholenden Absätzen. Die letzte Passage muss exakt lauten: „Und genau das ist vielleicht das Schönste an diesem Spiegel: Er muss dich nicht festhalten. Er darf mit dir weiterwachsen.“ Als allerletzter Satz folgt: „Da ist noch mehr.“ Keine Herzen.
+
+Falls in dieser Unterhaltung tatsächlich eine PDF-Datei erstellt werden kann, erstelle ein druckfertiges PDF mit warmem Creme-/Pastellhintergrund, feinem Taupe-/Gold-Doppelrahmen, kleinem Sonnen- oder Puzzleteil-Symbol, gut lesbarer Serifenschrift, großzügigen Abständen und je einem Rahmen pro vorhandenem Impuls. Keine sichtbaren Markdown-Zeichen. Wenn keine Datei erstellt werden kann, liefere den fertigen Text und behaupte nicht, ein PDF erstellt zu haben.
+
+Prüfe vor der Ausgabe: Sind alle Aussagen belegt? Bringt jeder Absatz einen neuen Gedanken? Sind Wiederholungen, Ursachenbehauptungen und Methodenkommentare entfernt? Sind alle Impulse eigenständig gegenüber Haupttext und zueinander? Stimmen Überschrift und Schluss exakt? Die Anweisung muss auf höchstens eine DIN-A4-Seite passen; kürze Formulierungen, nicht die Regeln.</textarea>
+
+    <script>
+        const promptText = document.getElementById("promptText");
+        const copyBtn = document.getElementById("copyBtn");
+        const chatBtn = document.getElementById("chatBtn");
+        const toast = document.getElementById("toastMessage");
+
+        async function copyInstruction() {
+            const text = promptText.value;
+
+            try {
+                if (navigator.clipboard && window.isSecureContext) {
+                    await navigator.clipboard.writeText(text);
+                } else {
+                    promptText.removeAttribute("aria-hidden");
+                    promptText.select();
+                    promptText.setSelectionRange(0, text.length);
+
+                    const success = document.execCommand("copy");
+                    promptText.setAttribute("aria-hidden", "true");
+                    promptText.blur();
+
+                    if (!success) {
+                        throw new Error("Kopieren fehlgeschlagen");
+                    }
+                }
+
+                toast.textContent =
+                    "Anweisung kopiert! Füge sie mit deinen Antworten und optional deiner Lebensgeschichte in ChatGPT ein.";
+                toast.style.color = "#2e7d32";
+                toast.classList.add("visible");
+                return true;
+            } catch (error) {
+                toast.textContent =
+                    "Das Kopieren ist fehlgeschlagen. Bitte versuche es erneut.";
+                toast.style.color = "#a12622";
+                toast.classList.add("visible");
+                return false;
+            }
+        }
+
+        copyBtn.addEventListener("click", copyInstruction);
+
+        chatBtn.addEventListener("click", async function (event) {
+            event.preventDefault();
+
+            // Die Webseite kann ChatGPT öffnen und den Text kopieren,
+            // aber nicht automatisch eine Nachricht in ChatGPT absenden.
+            window.open(
+                "https://chatgpt.com/",
+                "_blank",
+                "noopener,noreferrer"
+            );
+
+            await copyInstruction();
+        });
+    </script>
+</body>
+</html>
