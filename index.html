@@ -1,245 +1,73 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Seelenspiegel – Auswertung mit ChatGPT</title>
-    <style>
-        :root {
-            --bg-color: #FAF6F0;
-            --container-bg: #FFFFFF;
-            --text-color: #2B2623;
-            --accent-color: #6B4A38;
-            --accent-hover: #54382A;
-            --border-color: #E6DFD5;
-        }
-
-        body {
-            font-family: Georgia, serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .card {
-            background-color: var(--container-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            max-width: 600px;
-            width: 100%;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(43, 38, 35, 0.05);
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--text-color);
-        }
-
-        p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            color: #554D47;
-        }
-
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .btn {
-            background-color: var(--accent-color);
-            color: #FFFFFF;
-            border: none;
-            border-radius: 6px;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-family: Georgia, serif;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-            width: 100%;
-            max-width: 320px;
-            text-decoration: none;
-            display: inline-block;
-            box-sizing: border-box;
-        }
-
-        .btn:hover {
-            background-color: var(--accent-hover);
-        }
-
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--accent-color);
-            border: 2px solid var(--accent-color);
-        }
-
-        .btn-secondary:hover {
-            background-color: rgba(107, 74, 56, 0.05);
-        }
-
-        .toast {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            color: #2e7d32;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            min-height: 20px;
-        }
-
-        .toast.visible {
-            opacity: 1;
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 12px;
-            }
-
-            .card {
-                padding: 28px 20px;
-            }
-
-            h1 {
-                font-size: 1.55rem;
-            }
-
-            p {
-                font-size: 1rem;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f5efe5">
+<meta name="description" content="Dein persönlicher Seelenspiegel – die Anleitung für deine individuelle Auswertung mit ChatGPT.">
+<title>Da ist noch mehr – Dein Seelenspiegel</title>
+<style>
+:root {color-scheme:light; --ink:#403b37;--muted:#70685f;--line:#d7c7ae;--accent:#806b54;--cream:#faf7f1;}
+*{box-sizing:border-box} body{margin:0;background:linear-gradient(145deg,#f4eee5,#faf8f3 60%,#ede5d9);color:var(--ink);font-family:Georgia,'Times New Roman',serif;min-height:100vh}
+main{max-width:740px;margin:48px auto;padding:clamp(24px,6vw,60px);background:var(--cream);border:1px solid var(--line);outline:1px solid #e9dfd0;outline-offset:-9px;box-shadow:0 14px 50px #52463618;text-align:center;border-radius:4px}
+.symbol{font-size:30px;color:#b99b70;margin-bottom:12px} h1{font-weight:normal;line-height:1.17;font-size:clamp(2.3rem,6vw,3.6rem);margin:0 0 12px} .sub{font-family:Arial,sans-serif;letter-spacing:.16em;text-transform:uppercase;font-size:.85rem;color:var(--accent);margin-bottom:30px}
+p{line-height:1.75;font-size:1.07rem} .lead{max-width:550px;margin:0 auto 25px} .rule{width:80px;height:1px;background:var(--line);margin:27px auto}
+.steps{max-width:540px;text-align:left;margin:0 auto 25px;padding-left:26px;font:1rem/1.75 Arial,sans-serif;color:var(--muted)} .steps li{margin-bottom:9px} .buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin:27px 0 16px}
+button,a.action{appearance:none;display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:14px 22px;border:1px solid #85735f;border-radius:5px;font:600 1rem Arial,sans-serif;text-decoration:none;cursor:pointer;transition:background .15s;}
+button{background:#806b54;color:white}button:hover{background:#66533f}a.action{color:#57483b;background:transparent}a.action:hover{background:#f0e9dd}button:focus-visible,a.action:focus-visible{outline:3px solid #bd9c6d;outline-offset:3px}
+#status{font: .95rem/1.5 Arial,sans-serif;min-height:2em;color:#4f6a4b} .small{font: .91rem/1.7 Arial,sans-serif;color:var(--muted);max-width:540px;margin:12px auto} footer{margin-top:32px;font: .83rem/1.5 Arial,sans-serif;color:var(--muted)}
+@media(max-width:500px){main{margin:12px;padding:35px 22px}.buttons{flex-direction:column}button,a.action{width:100%}}
+</style>
 </head>
 <body>
+<main>
+<div class="symbol" aria-hidden="true">✧</div>
+<h1>Da ist noch mehr</h1>
+<div class="sub">Ein Seelenspiegel</div>
+<p class="lead">Du hast deine Puzzleteile gesammelt. Wenn du möchtest, kannst du deine Antworten nun mit einem Blick von außen betrachten lassen.</p>
+<div class="rule" aria-hidden="true"></div>
+<ol class="steps">
+<li>Bereite deine Antworten auf die 15 Puzzle-Fragen vor. Eine persönliche Lebensgeschichte kannst du freiwillig ergänzen.</li>
+<li>Klicke auf <strong>„Anweisung kopieren“</strong>.</li>
+<li>Öffne ChatGPT über <strong>„Mit ChatGPT starten“</strong> oder wechsle zu deinem bereits geöffneten Chat.</li>
+<li>Füge zuerst <strong>nur die kopierte Anweisung</strong> ein und sende sie ab.</li>
+<li>Wenn ChatGPT dich dazu auffordert, füge deine vorbereiteten Antworten und gegebenenfalls deine Lebensgeschichte gemeinsam in einer Nachricht ein.</li>
+<li>Bestätige auf die anschließende Frage mit <strong>„Ja“</strong>, wenn deine Angaben vollständig sind. Danach erhältst du deinen persönlichen Seelenspiegel direkt im Chat.</li>
+</ol>
+<div class="buttons">
+<button id="copy" type="button">Anweisung kopieren</button>
+<a class="action" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">Mit ChatGPT starten ↗</a>
+</div>
+<p id="status" role="status" aria-live="polite"></p>
+<p class="small">Die Anweisung wird nur in deine Zwischenablage kopiert. Die Seite übermittelt keine Antworten an ChatGPT und erstellt selbst keine Auswertung.</p>
+<p class="small">Bitte achte darauf, welche persönlichen Angaben du bei ChatGPT eingibst. Ein temporärer Chat wird nicht in deinem Chatverlauf gespeichert.</p>
+<div class="rule" aria-hidden="true"></div>
 
-    <main class="card">
-        <h1>Dein Seelenspiegel</h1>
-
-        <p>
-            Du hast die 15 Puzzle-Fragen in deinem Buch beantwortet?
-            Kopiere die Auswertungsanweisung und öffne ChatGPT.
-            Füge die Anweisung zusammen mit deinen 15 Antworten und –
-            wenn du möchtest – deiner persönlichen Lebensgeschichte
-            in <strong>eine Nachricht</strong> ein und sende sie ab.
-            ChatGPT erstellt daraus deinen persönlichen Seelenspiegel.
-        </p>
-
-        <div class="btn-group">
-            <button class="btn" id="copyBtn" type="button">
-                Anweisung kopieren
-            </button>
-
-            <a
-                href="https://chatgpt.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-secondary"
-                id="chatBtn"
-            >
-                Mit ChatGPT starten
-            </a>
-        </div>
-
-        <div
-            class="toast"
-            id="toastMessage"
-            role="status"
-            aria-live="polite"
-        ></div>
-    </main>
-
-    <!-- Auswertungsanweisung: unsichtbar, wird über die Buttons kopiert -->
-    <textarea id="promptText" style="position:absolute;left:-9999px;" aria-hidden="true" tabindex="-1">SEELENSPIEGEL – TRUTHCODE
-
-Erstelle aus meinen 15 Puzzle-Antworten und meiner freiwilligen Lebensgeschichte einen persönlichen Seelenspiegel. Nutze alle Angaben aus dieser oder unmittelbar vorherigen Nachrichten. Stelle keine Rückfragen und beginne nicht erneut mit den Puzzle-Fragen. Ausgelassene oder mit „Weiß ich nicht“ beantwortete Fragen bleiben offen; werte das vorhandene Material trotzdem aus.
-
-Schreibe direkt den fertigen Text: warm, ruhig, menschlich und klar in der Du-Form. Beginne mit konkret belegten Stärken. Verbinde die Antworten zu einem Gesamtbild, statt sie Frage für Frage zusammenzufassen. Jeder Absatz muss einen neuen Gedanken voranbringen; wiederhole keine Aussage nur mit anderen Worten.
-
-TRUTHCODE: Nutze ausschließlich tatsächlich Gesagtes. Erfinde keine Eigenschaften, Motive, Bedürfnisse oder Ursachen. Keine Diagnosen, Etiketten oder pauschale Psychologie. Die Lebensgeschichte ergänzt den Kontext, beweist aber nicht automatisch, woher ein heutiges Verhalten stammt. Bewahre Widersprüche und unterschiedliche Seiten. Eine Erkenntnis muss durch konkrete Aussagen getragen sein und eine neue, nachvollziehbare Bedeutung zeigen. Schwache oder spekulative Verbindungen lässt du weg.
-
-Gib nur den fertigen Seelenspiegel aus: keine Prüfschritte, Methodenkommentare oder Erklärungen darüber, was du bewusst nicht ableitest. Keine Listen, Analyse-Überschriften oder Frage-für-Frage-Auswertung. Einzige Überschrift: „Das ist dein Seelenspiegel.“ Hebe echte neue Erkenntnisse sparsam hervor.
-
-IMPULSE: Ein Impuls ist weder Rat noch Wiederholung. Nimm ihn nur auf, wenn er einen eigenständigen, persönlichen und belegbaren Gedanken enthält, der weder im Haupttext noch in einem anderen Impuls vorkommt. Vergleiche jeden Impuls mit dem gesamten Text und den übrigen Impulsen; streiche jede bloße Umformulierung. Schreibe kurz und natürlich: ein klarer Gedanke, keine verschachtelten Erklärungen. Keine Aufforderungen („du solltest/musst/darfst“), Kalendersprüche, allgemeinen Lebensweisheiten, künstlichen Gegensätze oder angehängten Erklärungen. Keine feste Anzahl. Gibt es keinen eigenständigen Impuls, entfällt der Abschnitt vollständig.
-
-Beende den Text mit zwei bis drei ruhigen, nicht wiederholenden Absätzen. Die letzte Passage muss exakt lauten: „Und genau das ist vielleicht das Schönste an diesem Spiegel: Er muss dich nicht festhalten. Er darf mit dir weiterwachsen.“ Als allerletzter Satz folgt: „Da ist noch mehr.“ Keine Herzen.
-
-Falls in dieser Unterhaltung tatsächlich eine PDF-Datei erstellt werden kann, erstelle ein druckfertiges PDF mit warmem Creme-/Pastellhintergrund, feinem Taupe-/Gold-Doppelrahmen, kleinem Sonnen- oder Puzzleteil-Symbol, gut lesbarer Serifenschrift, großzügigen Abständen und je einem Rahmen pro vorhandenem Impuls. Keine sichtbaren Markdown-Zeichen. Wenn keine Datei erstellt werden kann, liefere den fertigen Text und behaupte nicht, ein PDF erstellt zu haben.
-
-Prüfe vor der Ausgabe: Sind alle Aussagen belegt? Bringt jeder Absatz einen neuen Gedanken? Sind Wiederholungen, Ursachenbehauptungen und Methodenkommentare entfernt? Sind alle Impulse eigenständig gegenüber Haupttext und zueinander? Stimmen Überschrift und Schluss exakt? Die Anweisung muss auf höchstens eine DIN-A4-Seite passen; kürze Formulierungen, nicht die Regeln.</textarea>
-
-    <script>
-        const promptText = document.getElementById("promptText");
-        const copyBtn = document.getElementById("copyBtn");
-        const chatBtn = document.getElementById("chatBtn");
-        const toast = document.getElementById("toastMessage");
-
-        async function copyInstruction() {
-            const text = promptText.value;
-
-            try {
-                if (navigator.clipboard && window.isSecureContext) {
-                    await navigator.clipboard.writeText(text);
-                } else {
-                    promptText.removeAttribute("aria-hidden");
-                    promptText.select();
-                    promptText.setSelectionRange(0, text.length);
-
-                    const success = document.execCommand("copy");
-                    promptText.setAttribute("aria-hidden", "true");
-                    promptText.blur();
-
-                    if (!success) {
-                        throw new Error("Kopieren fehlgeschlagen");
-                    }
-                }
-
-                toast.textContent =
-                    "Anweisung kopiert! Füge sie mit deinen Antworten und optional deiner Lebensgeschichte in ChatGPT ein.";
-                toast.style.color = "#2e7d32";
-                toast.classList.add("visible");
-                return true;
-            } catch (error) {
-                toast.textContent =
-                    "Das Kopieren ist fehlgeschlagen. Bitte versuche es erneut.";
-                toast.style.color = "#a12622";
-                toast.classList.add("visible");
-                return false;
-            }
-        }
-
-        copyBtn.addEventListener("click", copyInstruction);
-
-        chatBtn.addEventListener("click", async function (event) {
-            event.preventDefault();
-
-            // Die Webseite kann ChatGPT öffnen und den Text kopieren,
-            // aber nicht automatisch eine Nachricht in ChatGPT absenden.
-            window.open(
-                "https://chatgpt.com/",
-                "_blank",
-                "noopener,noreferrer"
-            );
-
-            await copyInstruction();
-        });
-    </script>
+</main>
+<script>
+'use strict';
+const fullPromptText = "SEELENSPIEGEL\n\nVerbindliche Arbeitsanweisung für ChatGPT\n\n1. DAS ERGEBNIS\n\nErstelle aus den persönlichen Antworten des Lesers auf bis zu 15 Puzzle-Fragen und einer gegebenenfalls freiwillig ergänzten Lebensgeschichte einen individuellen Seelenspiegel.\n\nDer Seelenspiegel soll warm, ruhig, menschlich, verständlich und persönlich sein. Schreibe in der Du-Form.\n\nVerbinde die Antworten zu einem Gesamtbild. Erkenne nachvollziehbare Zusammenhänge zwischen Stärken, Werten, Bedürfnissen, Wünschen, Unsicherheiten und unterschiedlichen Seiten des Lesers.\n\nDer Leser soll sich wiedererkennen und zugleich neue Perspektiven entdecken können, die sich aus dem Zusammenspiel seiner Antworten ergeben.\n\nDas Ergebnis ist ein persönlicher Seelenspiegel – kein psychologischer Bericht, kein Ratgeber und keine Zusammenfassung einzelner Puzzle-Fragen.\n\n2. FESTES AUSGABEFORMAT – NICHT VERÄNDERN\n\nDer fertige Seelenspiegel besteht ausschließlich aus vier Bestandteilen in dieser Reihenfolge:\n\nA – Eine einzige Überschrift\n\nDas ist dein Seelenspiegel.\n\nB – Persönlicher Fließtext\n\nDer gesamte individuelle Seelenspiegel wird in zusammenhängenden Absätzen geschrieben.\n\nPersönliche Impulse werden unmittelbar an den passenden Stellen in diesen Fließtext integriert.\n\nEs gibt keine weiteren Überschriften, keine nummerierten Gedanken, keine Fragenlisten und keine gesonderte Impulssammlung.\n\nC – Verbindlicher Schluss\n\nNach dem letzten individuell formulierten Absatz stehen wortgetreu und jeweils als eigener Absatz:\n\nUnd genau das ist vielleicht das Schönste an diesem Spiegel: Er muss dich nicht festhalten. Er darf mit dir weiterwachsen.\n\nDa ist noch mehr.\n\nD – Verbindlicher Speicherhinweis\n\nDirekt nach dem persönlichen Seelenspiegel, mit einem Absatz Abstand, steht wortgetreu:\n\nMöchtest du deinen Seelenspiegel speichern?\n\nDu kannst deinen fertigen Seelenspiegel markieren, kopieren und beispielsweise in ein Word-Dokument einfügen. Dort kannst du ihn auf deinem Computer speichern oder über „Datei → Speichern unter“ beziehungsweise „Exportieren“ als PDF sichern.\n\nSo kannst du deinen Seelenspiegel jederzeit wieder lesen, ausdrucken oder für dich aufbewahren.\n\nDer Speicherhinweis ist der letzte Bestandteil der gesamten Ausgabe.\n\nErstelle keine PDF-Datei und biete keine automatische PDF-Erstellung an.\n\nDie persönliche Auswertung darf individuell formuliert werden. Die vier Bestandteile und die vorgegebenen Textpassagen dürfen nicht verändert oder weggelassen werden.\n\n3. VERBINDLICHER STARTABLAUF\n\nBeginne niemals mit einer Auswertung, solange der Leser nach dieser Anweisung noch keine eigenen Puzzle-Antworten übermittelt und deren Vollständigkeit ausdrücklich bestätigt hat.\n\nVerwende keine Erinnerungen, früheren Gespräche oder Beispielantworten.\n\nWenn noch keine eigenen Antworten vorliegen, antworte ausschließlich:\n\n„Deine Anweisung ist angekommen. Bitte füge jetzt deine vorbereiteten Puzzle-Antworten ein. Wenn du möchtest, ergänze deine persönliche Lebensgeschichte.“\n\nWarte anschließend auf die Eingabe. Stelle die 15 Fragen nicht erneut.\n\nDer Leser darf seine Antworten in einer oder mehreren Nachrichten übermitteln. Ausgelassene Fragen und Antworten wie „Weiß ich nicht“ bleiben offen.\n\nNach jeder Übermittlung neuer Antworten frage ausschließlich:\n\n„Hast du alle Antworten eingefügt, die du für deinen Seelenspiegel verwenden möchtest? Antworte bitte mit Ja oder Nein.“\n\nBei „Nein“ warte auf weitere Angaben.\n\nErst nach einem ausdrücklichen „Ja“ auf diese Bestätigungsfrage darfst du die Auswertung beginnen.\n\nWenn überhaupt keine auswertbare persönliche Antwort vorliegt, bitte um mindestens eine eigene Antwort.\n\nNach gültiger Bestätigung stelle keine weiteren Fragen. Gib unmittelbar den vollständigen Seelenspiegel im festgelegten Ausgabeformat aus.\n\n4. TRUTHCODE – WAHRHEIT UND NACHVOLLZIEHBARKEIT\n\nVerwende ausschließlich die tatsächlich übermittelten Antworten und die gegebenenfalls ergänzte Lebensgeschichte.\n\nErfinde keine Eigenschaften, Gefühle, Motive, Bedürfnisse, Erfahrungen oder Ursachen.\n\nUnterscheide zwischen dem, was der Leser ausdrücklich über sich sagt, und den Zusammenhängen, die sich daraus nachvollziehbar ableiten lassen.\n\nDie Lebensgeschichte liefert zusätzlichen Kontext, beweist aber nicht automatisch die Ursache eines heutigen Verhaltens.\n\nEin neuer Gedanke darf eine Perspektive eröffnen, ohne deshalb als feststehende Tatsache über den Leser dargestellt zu werden.\n\nDas Wort „vielleicht“ macht eine unbelegte Behauptung nicht zulässig.\n\nBewahre unterschiedliche Seiten des Lesers, ohne sie künstlich aufzulösen.\n\nKeine Diagnosen, psychologischen Etiketten oder pauschalen Persönlichkeitsdeutungen.\n\nKeine geschlechtsspezifischen Zuschreibungen, sofern der Leser sein Geschlecht nicht selbst eindeutig angegeben hat.\n\nBesondere Regel für kurze, unvollständige oder offene Antworten\n\nWenn der Leser nur kurze oder wenige Antworten gibt, darfst du daraus keine zusätzlichen Persönlichkeitsmerkmale, Motive, Bedürfnisse oder inneren Haltungen ableiten.\n\nInsbesondere darfst du aus der Kürze einer Antwort, einem „Weiß ich nicht“ oder einer einfachen Alltagstätigkeit keine psychologische Bedeutung konstruieren.\n\nBeispiel: Wenn der Leser schreibt, dass er gerne spazieren geht, darfst du daraus nicht schließen, dass er besonders unabhängig ist, Abstand zu anderen sucht oder beim Spazierengehen seine Gedanken ordnet. Solche Bedeutungen dürfen nur verwendet werden, wenn der Leser sie selbst beschrieben hat.\n\nEine unbeantwortete Frage ist keine versteckte Aussage über den Menschen.\n\nBeschränke dich auf tatsächlich erkennbare Zusammenhänge. Wenn nur wenige vorhanden sind, schreibe einen entsprechend kürzeren Seelenspiegel.\n\nVersuche nicht, fehlende Informationen durch allgemeine Lebensweisheiten, Vermutungen oder künstlich vertiefte Interpretationen auszugleichen.\n\nEin kurzer, ehrlicher Seelenspiegel ist wertvoller als ein ausführlicher Text mit erfundenen Erkenntnissen.\n\n5. DIE PERSÖNLICHE AUSWERTUNG\n\nBeginne mit den ausdrücklich beschriebenen Stärken und Werten.\n\nEntwickle anschließend einen zusammenhängenden Text, in dem die Antworten miteinander verbunden werden.\n\nAchte auf persönliche Spannungen, ergänzende Eigenschaften, wiederkehrende Bedürfnisse und mögliche Verbindungen zwischen Erfahrungen und Wünschen.\n\nEine Erkenntnis ist nur geeignet, wenn sie sich aus konkreten Angaben des Lesers nachvollziehbar ergibt.\n\nJeder Absatz muss einen neuen, eigenständigen Gedanken enthalten.\n\nErkläre einen Zusammenhang nur einmal. Wiederhole ihn nicht später in anderer Form.\n\nVermeide künstliche Tiefgründigkeit, allgemeine Lebensweisheiten und wiederkehrende Einleitungen wie „Hier zeigt sich“ oder „Darin liegt eine wichtige Erkenntnis“.\n\nDie Länge richtet sich nach der Aussagekraft der Antworten. Wenige Angaben ergeben einen kürzeren Seelenspiegel.\n\n6. PERSÖNLICHE IMPULSE\n\nErgänze dort, wo es sinnvoll ist, kurze, persönliche Impulse.\n\nEin Impuls soll eine nachvollziehbare Erkenntnis aus einem neuen Blickwinkel betrachten oder einen wichtigen Zusammenhang besonders treffend auf den Punkt bringen.\n\nBeispiel:\n\nWenn ein Leser beschreibt, dass er vieles allein bewältigen kann, sich aber manchmal Unterstützung wünscht, kann ein Impuls lauten:\n\n„Dass du vieles allein schaffen kannst, bedeutet nicht, dass du alles allein schaffen musst.“\n\nEntwickle die tatsächlichen Impulse individuell aus den Antworten des jeweiligen Lesers. Verwende das Beispiel nicht automatisch.\n\nEin guter Impuls ist:\n\npersönlich und durch die Antworten begründet;\n\nverständlich und prägnant;\n\nhilfreich, ohne belehrend zu sein;\n\nfrei von unbelegten Behauptungen;\n\nkeine Wiederholung des vorherigen Absatzes.\n\nImpulse stehen ausschließlich innerhalb des persönlichen Fließtextes.\n\nSie können als kurze eigene Absätze erscheinen, erhalten aber niemals eine Überschrift oder Nummerierung.\n\nVerwende keine Coaching-Fragen, Übungen, Aufgaben oder Handlungsanweisungen.\n\nEs gibt keine feste Anzahl. Schreibe lieber wenige treffende Impulse als viele austauschbare Gedanken.\n\n7. REDAKTIONELLE QUALITÄT\n\nPrüfe vor der Ausgabe:\n\nWird der Leser als individueller Mensch sichtbar?\n\nWerden tatsächlich neue Zusammenhänge zwischen seinen Antworten erkennbar?\n\nSind alle Aussagen nachvollziehbar belegt?\n\nBieten die Impulse einen zusätzlichen persönlichen Mehrwert?\n\nWird jeder wesentliche Gedanke nur einmal erklärt?\n\nSind überflüssige Wiederholungen und allgemeine Ermutigungen entfernt?\n\nFehlen Ratgeberfragen, Aufgaben und gesonderte Schlusszusammenfassungen?\n\nWurden knappe oder unbeantwortete Fragen bewusst offengelassen, statt sie mit Vermutungen zu füllen?\n\nKeine künstliche Verlängerung und keine versteckten Coaching-Fragen\n\nFormuliere persönliche Erkenntnisse und Impulse ausschließlich als Aussagen, nicht als Fragen. Das gilt auch für rhetorische Fragen innerhalb des Fließtextes.\n\nWiederhole einen Zusammenhang nicht mehrfach in unterschiedlichen Absätzen. Wenn zwei Absätze dieselbe Kernaussage enthalten, fasse sie zusammen oder entferne den schwächeren.\n\nBei kurzen Antworten darf der Seelenspiegel deutlich kürzer ausfallen. Versuche nicht, durch zusätzliche Absätze eine bestimmte Länge zu erreichen.\n\nDer Text soll sich wie ein aufmerksamer, menschlicher Blick von außen lesen.\n\nSchreibe nicht länger, als es die vorhandenen Antworten rechtfertigen.\n\n8. LETZTE AUSGABEKONTROLLE\n\nBevor du deine Antwort absendest, prüfe die vollständige Ausgabe auf diese sechs Bedingungen:\n\nDie Auswertung wurde erst nach ausdrücklicher Bestätigung der Antworten erstellt.\n\nDie einzige Überschrift des persönlichen Seelenspiegels lautet „Das ist dein Seelenspiegel.“\n\nDer persönliche Text besteht ausschließlich aus zusammenhängenden Absätzen mit gegebenenfalls integrierten Impulsen.\n\nEs gibt keine zusätzlichen Kapitel, Listen, Coaching-Fragen oder Ratgeberrubriken.\n\nDer persönliche Seelenspiegel endet wortgetreu mit den beiden vorgeschriebenen Schlussabsätzen.\n\nDanach folgt der vollständige, unveränderte Speicherhinweis einschließlich seines letzten Satzes.\n\nKorrigiere jede festgestellte Abweichung vor dem Absenden.\n\nZeige diese Prüfung nicht an.\n\n9. UNMITTELBAR VERBINDLICH FÜR DIE FERTIGE AUSGABE\n\nNach der Bestätigung des Lesers schreibe ausschließlich:\n\nZuerst: „Das ist dein Seelenspiegel.“\n\nDanach: den individuellen Seelenspiegel als zusammenhängenden Fließtext mit persönlich begründeten, integrierten Impulsen.\n\nDanach wortgetreu:\n\nUnd genau das ist vielleicht das Schönste an diesem Spiegel: Er muss dich nicht festhalten. Er darf mit dir weiterwachsen.\n\nDa ist noch mehr.\n\nDanach wortgetreu:\n\nMöchtest du deinen Seelenspiegel speichern?\n\nDu kannst deinen fertigen Seelenspiegel markieren, kopieren und beispielsweise in ein Word-Dokument einfügen. Dort kannst du ihn auf deinem Computer speichern oder über „Datei → Speichern unter“ beziehungsweise „Exportieren“ als PDF sichern.\n\nSo kannst du deinen Seelenspiegel jederzeit wieder lesen, ausdrucken oder für dich aufbewahren.\n\nNach diesem letzten Satz ist die Ausgabe beendet. Keine weiteren Texte hinzufügen.";
+const copyButton = document.getElementById('copy');
+const statusEl = document.getElementById('status');
+copyButton.addEventListener('click', async () => {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(fullPromptText);
+    } else {
+      const field = document.createElement('textarea');
+      field.value = fullPromptText;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed'; field.style.opacity = '0';
+      document.body.appendChild(field); field.select();
+      const copied = document.execCommand('copy');
+      field.remove();
+      if (!copied) throw new Error('copy failed');
+    }
+    statusEl.textContent = 'Die vollständige Anweisung wurde kopiert. Öffne jetzt ChatGPT und füge sie dort ein. Sende zunächst nur die Anweisung.';
+  } catch (error) {
+    statusEl.textContent = 'Das Kopieren hat nicht funktioniert. Bitte erlaube den Zugriff auf die Zwischenablage oder versuche es mit einem anderen Browser.';
+  }
+});
+</script>
 </body>
 </html>
